@@ -1,0 +1,96 @@
+{
+    "ss_0": {
+      "value": 1080000000,
+      "unit": "Pa",
+      "description": "prestressing steel",
+      "type": "material",
+      "important": true
+    },
+    "t_ch": {
+      "value": 0.04,
+      "unit": "m",
+      "description": "R_chapa - R_m",
+      "type": "geometry"
+    },
+    "l_ch": {
+      "value": 0.002,
+      "unit": "m",
+      "description": "length of chapa",
+      "type": "geometry"
+    },
+    "t_c": {
+      "value": 0.155,
+      "unit": "m",
+      "description": "thickness of concrete core",
+      "type": "geometry"
+    },
+    "t": {
+      "value": 0.155,
+      "unit": "m",
+      "description": "thickness of pipe",
+      "type": "geometry"
+    },
+    "R": {
+      "value": 0.955,
+      "unit": "m",
+      "description": "radius of pipe",
+      "type": "geometry",
+      "important": true
+    },
+    "s": {
+      "value": 0.03125,
+      "unit": "m",
+      "description": "coil spacing",
+      "type": "geometry",
+      "important": true
+    },
+    "A_s": {
+      "value": 0.000384845,
+      "unit": "m^2",
+      "description": "cross-sectional area of steel",
+      "type": "geometry"
+    },
+    "R_c": {
+      "value": 0.915,
+      "unit": "m",
+      "description": "coil radius - espiras",
+      "type": "geometry"
+    },
+    "L": {
+      "value": 25,
+      "unit": "m",
+      "description": "length of pipe",
+      "type": "geometry"
+    },
+    "nu_c": {
+      "value": 0.2,
+      "unit": "",
+      "description": "Poisson's ratio of concrete",
+      "type": "material"
+    },
+    "E": {
+      "value": 35000000000,
+      "unit": "Pa",
+      "description": "Young's modulus of concrete",
+      "type": "material"
+    },
+    "E_s": {
+      "value": 200000000000,
+      "unit": "Pa",
+      "description": "Young's modulus of steel",
+      "type": "material"
+    },
+    "nu_s": {
+      "value": 0.3,
+      "unit": "",
+      "description": "Poisson's ratio of steel",
+      "type": "material"
+    },
+    "sc_T": {
+      "value": 3500000,
+      "unit": "Pa",
+      "description": "tensile strength of concrete",
+      "type": "material",
+      "important": true
+    }
+  }
