@@ -18,7 +18,7 @@ date_span = rdata['date_span']
 long_time = rdata['long_time']
 
 def create_model(series):
-    model = ARIMA(series, order=(3, 2, 2)) # p, d, q
+    model = ARIMA(series, order=(3, 2, 10)) # p, d, q
     model_fit = model.fit()
     return model_fit
 
@@ -49,12 +49,16 @@ times_call = [0]
 @app.route('/get', methods=['GET'])
 def get_mesurement():    
     global forecast_model  # Declara que vas a usar la variable global forecast_model
-
+    global sigma_hist
     now = datetime.datetime.now().timestamp()
     now_mod = np.mod(now, long_time)
 
     idx = np.argmin(np.abs(tspan - now_mod ))
 
+
+    if idx  == 0:
+        # datadta 
+        sigma_hist = []
     spiras_list = rdata['spiras'][idx]
     preassure  = pspan[idx]
 
@@ -76,7 +80,10 @@ def get_mesurement():
     arange_norm = arange_norm.tolist()
 
     sigma_max = float(np.max(r["s_theta_total"]))
+    # sigma_hist.append(sigma_max)
     sigma_hist.append(sigma_max)
+
+
     if len(sigma_hist) > 200:
         sigma_hist.pop(0)
 
@@ -90,7 +97,9 @@ def get_mesurement():
         # add the sigma_hist last value to the model
         forecast_model = forecast_model.append(sigma_hist[-2:-1], refit=False)
 
-    nstep_forecast = 10
+
+
+    nstep_forecast = 20
     forecast = forecast_model.get_forecast(steps=nstep_forecast)
     sigma_forecast = forecast.predicted_mean.tolist()
 

@@ -24,7 +24,7 @@ function WaterPipe() {
 
 function PipeScene() {
   return (
-    <Canvas style={{ height: '500px', width: '600px' }}>
+    <Canvas style={{ height: '700px', width: '600px' }}>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
       <WaterPipe />

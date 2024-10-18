@@ -42,7 +42,7 @@ const App = () => {
 
 
               </div>
-              <CylinderHole coil={1/80}></CylinderHole>
+              <CylinderHole coil={1/100}></CylinderHole>
 
 
             </div>

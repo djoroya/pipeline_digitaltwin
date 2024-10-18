@@ -15,10 +15,15 @@ export function CylinderHole({ coil ,height="400px", width="1200px"}) {
 
   const cycles = 1/coil 
   const h = 4
+
+  const camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
+
   return (
-    <Canvas camera={{ position: [2.5, 1.5, 2.6] }} style={{ height:height, width: width}}>
+    <Canvas camera={{ position: [2.5, 1.5, 2.6], fov: 75, near: 0.1, far: 1000 }} 
+    style={{ height:height, width: width}}>
       {/* <CameraRotator /> */}
       <color attach="background" args={['white']} />
+       
       <OrbitControls />
       
       <mesh material={materialLambert}>
