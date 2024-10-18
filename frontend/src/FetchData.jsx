@@ -6,7 +6,7 @@ const FetchData = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data_list, setData_list] = useState([]);
-  const maxItems = 50;  // Definimos el máximo número de elementos en la lista
+  const maxItems = 100;  // Definimos el máximo número de elementos en la lista
 
   // Función para hacer la solicitud a la API
   const fetchData = async () => {

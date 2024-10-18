@@ -1,0 +1,8 @@
+ipykernel 
+numpy
+pandas
+flask
+flask_cors
+matplotlib
+git+https://github.com/djoroya/loadjson.git
+scipy

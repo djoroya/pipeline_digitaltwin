@@ -1,5 +1,5 @@
 import React  from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { HelixCurve} from './Curve'
@@ -18,7 +18,6 @@ export function CylinderHole({ coil ,height="400px", width="1200px"}) {
   return (
     <Canvas camera={{ position: [2.5, 1.5, 2.6] }} style={{ height:height, width: width}}>
       {/* <CameraRotator /> */}
-
       <color attach="background" args={['white']} />
       <OrbitControls />
       

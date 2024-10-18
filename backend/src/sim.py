@@ -17,7 +17,7 @@ def computedistribution(spiras):
         return np.ones(len(spiras))/len(spiras)
     
     xspan = np.arange(0,len(spiras))
-    sigma = 10
+    sigma = 20
 
     if np.sum(spiras) == 0:
         mid = len(spiras)//2
@@ -43,10 +43,10 @@ def computedistribution(spiras):
 
 def sim():
     nt = 1000
-    tspan = np.linspace(0, 60, nt)
+    tspan = np.linspace(0, 120, nt)
 
 
-    pspan = 5.5*theta(np.sin(2*np.pi*tspan/(10)))  + 0.5
+    pspan = 1.0*theta(np.sin(2*np.pi*tspan/(10)))  + 0.25
 
     pspan = pspan + 0.01*np.random.randn(len(tspan))
 
@@ -61,15 +61,17 @@ def sim():
     date_span = [datetime.datetime.fromtimestamp(ts) for ts in datestamp_span]
     long_time = tspan[-1] - tspan[0]
 
-    nslots = 30
+    nslots = 400
 
-    spiras = np.zeros(nslots)
+    spiras = np.zeros(nslots) 
 
-    rotura_prob = 0.01
+    rotura_prob_base = 0.025
 
     spiras_list = []
     for i in range(nt):
-        if np.random.rand() < rotura_prob + 0.05*np.sum(spiras)/nslots:
+        rotura_prob = rotura_prob_base + 0.5*np.sum(spiras)/nslots
+        rotura_prob = np.min([rotura_prob, 0.95])
+        if np.random.rand() < rotura_prob:
             distribution = computedistribution(spiras)
 
             idx = np.random.choice(nslots, 1, p=distribution)
@@ -78,11 +80,10 @@ def sim():
         spiras_list.append(spiras.copy().tolist())
 
 
-
     return {
         "tspan": tspan.tolist(),
         "pspan": pspan.tolist(),
         "date_span": date_span,
         "long_time": long_time,
-        "spiras": spiras_list
+        "spiras": spiras_list,
     }
