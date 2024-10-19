@@ -17,7 +17,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-plotly.js": "^2.6.0",
-    "three": "^0.169.0"
+    "three": "^0.169.0",
+    "three-subdivision-modifier": "^1.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

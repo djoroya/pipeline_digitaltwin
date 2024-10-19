@@ -104,7 +104,7 @@ export const HelixCurveLevel = ({radius,cycles}) => {
       const theta = cycles * 2 * Math.PI * t;
       const x = radius * Math.cos(theta);
       const y = radius * Math.sin(theta);
-      const z = t * h -2; // Ajusta la altura de la hélice
+      const z = (t-0.5) * h ; // Ajusta la altura de la hélice
       return new THREE.Vector3(x, y, z);
     };
   
@@ -113,7 +113,7 @@ export const HelixCurveLevel = ({radius,cycles}) => {
 
     //const Geometry = <tubeGeometry attach="geometry" args={[helixCurve, 5000, linewidth, 16, false]} /> 
 
-    const geometry = new THREE.TubeGeometry(helixCurve, 5000, linewidth, 16, false);
+    const geometry = new THREE.TubeGeometry(helixCurve, 7000, linewidth, 16, false);
     var position = geometry.attributes.position;
     var color = geometry.attributes.color;
 
