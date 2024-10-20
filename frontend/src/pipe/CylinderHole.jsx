@@ -25,7 +25,7 @@ export function CylinderHoleOnly({coil}) {
 
   // water cilinder 
 
-  const CreateCylinder = ({radius,lenght=5,
+  const CreateCylinder = ({radius,lenght=15.625,
                             thetal=2*Math.PI,
                             theta0=-Math.PI,
                             position=[0,0,0],th=0.1,color="rgb(250,250,250)"}) => {
@@ -95,6 +95,12 @@ export function CylinderHoleOnly({coil}) {
       // Desplazar la textura en el eje U (horizontal)
       // use modulo to repeat the texture
       material.map.offset.y = (material.map.offset.y + 0.0025)
+
+  // id = "spiras" html element <p id="spiras">{JSON.stringify(spiras)}</p>
+
+
+      
+
     })
     return <primitive object={mesh} ref={meshRef} />
   }
@@ -149,6 +155,10 @@ export function CylinderHoleOnly({coil}) {
     return <primitive object={line} />;
   }
 
+
+  const zlong = 15.625
+
+  const radiusfactor  = 2
   return (
     <>
       {/* <CameraRotator /> */}
@@ -156,44 +166,24 @@ export function CylinderHoleOnly({coil}) {
        
       <OrbitControls />
       
-      {/* <mesh material={materialLambert}>
-        <HollowCylinderGeometry innerRadius={0.5} outerRadius={0.6} height={h}  d={0.1}/>
-      </mesh> */}
-
-      {/* <mesh material={mat_concrete}>
-        <HollowCylinderGeometry  height={h} innerRadius={0.615} outerRadius={0.8} d={0.1} />
-      </mesh>       */}
-
-      {/* <mesh material={materialBasicRed}>
-        <HollowCylinderGeometry  height={h} innerRadius={0.81} outerRadius={0.85} d={0.1} />
-      </mesh>       */}
-
-      {/* <mesh material={mat_concrete}>
-        <HollowCylinderGeometry  height={h} innerRadius={0.86} outerRadius={0.9} d={0.1} />
-      </mesh>      
-
-        
+        <CreateCylinder radius={radiusfactor*0.65}  lenght={zlong} position={[0,0,0]} color="rgb(210,210,210)" />
+        <CreateCylinder radius={radiusfactor*0.85}  position={[0  , 0 ,-0.9*(1/3)*zlong]} lenght={(1/3)*zlong} th={0.05}></CreateCylinder>
+        <CreateCylinder radius={radiusfactor*0.85}  position={[0  , 0 , 0.9*(1/3)*zlong]} lenght={(1/3)*zlong} th={0.05}></CreateCylinder>
+        <CreateCylinder radius={radiusfactor*0.85} thetal={0.7*2*Math.PI}  position={[0,0,0]}  lenght={0.8*(1/3)*zlong} th={0.05}></CreateCylinder>
+        <CreateSolidCylinder radius={radiusfactor*0.65} position={[0,0,0]} lenght={1.05*zlong} color="rgb(210,210,210)"></CreateSolidCylinder>
       
+      <HelixCurve radius={radiusfactor*0.8} cycles={cycles} h={zlong} linewidth={0.02} />
 
- */}
 
-        <CreateCylinder radius={0.65}  lenght={5.0} position={[0,0,0]} color="rgb(210,210,210)" />
-        <CreateCylinder radius={0.85}  position={[0,0,-1.5]} lenght={1.5} th={0.05}></CreateCylinder>
-        <CreateCylinder radius={0.85} position={[0,0,1.5]}  lenght={1.5} th={0.05}></CreateCylinder>
-        <CreateCylinder radius={0.85} thetal={0.7*2*Math.PI}  position={[0,0,0]}  lenght={1.5} th={0.05}></CreateCylinder>
-        <CreateSolidCylinder radius={0.65} position={[0,0,0]} lenght={5.7} color="rgb(210,210,210)"></CreateSolidCylinder>
-      
-      <HelixCurve radius={0.8} cycles={cycles} h={5} linewidth={0.005} />
-      <ArrowCircle radius={0.45} numArrows={15} z ={2.7} color="red" lenght={0.175}/>
-      <ArrowCircle radius={0.8} numArrows={15} z ={2.7} color="blue" sign={-1} lenght={0.175}/>
+      <ArrowCircle radius={radiusfactor*0.45} numArrows={15} z ={0.5*zlong} color="red" lenght={0.175}/>
+      <ArrowCircle radius={radiusfactor*0.8} numArrows={15}  z ={0.5*zlong} color="blue" sign={-1} lenght={0.175}/>
 
-      <ArrowCircle radius={0.45} numArrows={15} z ={-2.7} color="red" lenght={0.175}/>
-      <ArrowCircle radius={0.8} numArrows={15} z ={-2.7} color="blue" sign={-1} lenght={0.175}/>
+      <ArrowCircle radius={radiusfactor*0.45} numArrows={15} z ={-0.5*zlong} color="red" lenght={0.175}/>
+      <ArrowCircle radius={radiusfactor*0.8} numArrows={15}  z ={-0.5*zlong} color="blue" sign={-1} lenght={0.175}/>
 
        <ambientLight intensity={1.0} />
         <Circle radius={0.65} numPoints={30} z={2.7} />
         <Circle radius={0.65} numPoints={30} z={-2.7} />
-       {/* <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} /> */}
     </>
   )
 }

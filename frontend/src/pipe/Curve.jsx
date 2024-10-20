@@ -69,12 +69,17 @@ export const Helix = () => {
 
 
 export const HelixCurveLevel = ({radius,cycles}) => {
-    const helixRef = useRef();
+    const helixRef = useRef(); 
   
     useFrame(() => {
       // Puedes agregar animaciones o actualizaciones de la hélice aquí
+
+      // id = z_spiras
+       const html = document.getElementById('z_spiras');
+       console.log(html)
     });
-  
+
+
     const helixCurve = new THREE.Curve();
     helixCurve.getPoint = (t) => {
       const theta = cycles * 2 * Math.PI * t;
@@ -97,6 +102,57 @@ export const HelixCurveLevel = ({radius,cycles}) => {
   
     useFrame(() => {
       // Puedes agregar animaciones o actualizaciones de la hélice aquí
+      const spiras_char = document.getElementById("z_spiras").innerHTML
+      const z_span_char = document.getElementById("z_span").innerHTML
+      const z_span = JSON.parse(z_span_char)
+      const spiras = JSON.parse(spiras_char)
+
+      const z_span_mid = z_span.map((x, i) => (x + z_span[i + 1]) / 2).slice(0, z_span.length - 1);
+      const spiras_mid = spiras.map((x, i) => (x + spiras[i + 1]) / 2).slice(0, spiras.length - 1);
+
+      const gauss = (x, mu, sigma) => {
+        return Math.exp(-Math.pow(x - mu, 2) / (2 * Math.pow(sigma, 2)));
+
+      }
+
+      const getSpiraValue = (z, z_span, spiras) => {
+        // sum os gaussians
+        let sum = 0;
+        for (let i = 0; i < z_span.length - 1; i++) {
+          sum += gauss(z, z_span[i], 0.1) * spiras[i];
+        }
+        return sum*0.5-1;
+      }
+
+
+
+      let minValue = -1;
+      let maxValue = 1;
+      // Calcula los colores
+      const colorsx = [];
+      for (let i = 0; i < geometry.attributes.position.count; i++) {
+
+          const z = geometry.attributes.position.getZ(i);
+
+          // search z in z_span
+          //const ind  =  z_span_mid.findIndex((element) => element === z);
+          // near 
+          const value = 0.1*z**2
+          if (value < minValue) minValue = value;
+          if (value > maxValue) maxValue = value;
+          const color = mapValueToColor(value); // Usa la función de mapeo JET
+
+          colorsx.push(color.r, color.g, color.b);          
+      }
+
+
+      // Crea el atributo de color y lo asigna a la geometría
+      geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colorsx), 3));
+
+      geometry.attributes.color.needsUpdate = true;
+
+
+
     });
   
     const helixCurve = new THREE.Curve();

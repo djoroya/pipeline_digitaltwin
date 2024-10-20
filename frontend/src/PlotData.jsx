@@ -184,7 +184,12 @@ const PlotData = ({ data_list }) => {
 
             const xlim_1 = [posix[0], 
                             time_forecast_iso_add_first[time_forecast_iso_add_first.length-1]]
+
+    const zlong = 15.625/2
+
+    const zlim = [-zlong, zlong]
     return (
+        <>
         <div className='mt-5' style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
             <Plot
             data={[
@@ -218,10 +223,10 @@ const PlotData = ({ data_list }) => {
                      sigma_data]}
             layout={ {...layout, 
                 grid: {rows: 2, columns: 1, pattern: 'independent'},  // Definir una cuadrícula de 2 filas, 1 columna
-                xaxis: {  range: [-10, 10]},
+                xaxis: {  range: zlim},
                 yaxis: { title: 'Concrete Stress [MPa]',range: [-70.25, 20.5],domain: [0.3, 1.0]},
                 yaxis2: { title: 'Broken Coils', range: [0, 1.0],domain: [0.0, 0.2]},
-                xaxis2: { title: 'z[m]',range: [-10, 10]},
+                xaxis2: { title: 'z[m]',range: zlim},
                 title: 'Stress Profile',
                 legend: {
                         x: 0.85,   // Posición horizontal (0.0 a 1.0)
@@ -234,7 +239,9 @@ const PlotData = ({ data_list }) => {
 
 
         </div>
-
+        <p id="z_span">{JSON.stringify(z_span)}</p>
+        <p id="z_spiras">{JSON.stringify(spiras)}</p>
+        </>
 
     );
 };

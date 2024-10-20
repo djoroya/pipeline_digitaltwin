@@ -61,7 +61,7 @@ def sim():
     date_span = [datetime.datetime.fromtimestamp(ts) for ts in datestamp_span]
     long_time = tspan[-1] - tspan[0]
 
-    nslots = 400
+    nslots = 200
 
     spiras = np.zeros(nslots) 
 
