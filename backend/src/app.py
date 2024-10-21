@@ -25,7 +25,16 @@ sigma_hist = []
 times_call = [0]
 @app.route('/get', methods=['GET'])
 def get_mesurement():    
-    return loadjson_plain("../deamon/data.json")
+
+    try:
+        r =  loadjson_plain("../deamon/data.json")
+    
+    except Exception as e:
+        print("Error in the get_mesurement function")
+        print(e)
+        r = {"error": True}
+
+    return jsonify(r)
     
 
 if __name__ == '__main__':

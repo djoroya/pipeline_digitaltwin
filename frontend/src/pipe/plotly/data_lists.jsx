@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import PlotData from './PlotData';
+import React, { useState } from 'react';
 
-const FetchData = () => {
+export const data_list = () => {
+
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,25 +37,13 @@ const FetchData = () => {
     }
   };
 
-  useEffect(() => {
-    // Hacer la primera solicitud al montar el componente
-    fetchData();
-
-    // Configurar un intervalo para solicitar datos cada 2 segundos
-    const intervalId = setInterval(fetchData, 1000);
-
-    // Limpiar el intervalo cuando el componente se desmonte
-    return () => clearInterval(intervalId);
-  }, []);
-
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  return (
-    <div>
-      <PlotData data_list={data_list} />
-    </div>
-  );
+  return ({
+    data,
+    loading,
+    error,
+    data_list,
+    fetchData
+  })
 };
 
-export default FetchData;
+export default data_list;
