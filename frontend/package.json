@@ -20,8 +20,10 @@
     "bootstrap": "^5.3.3",
     "plotly.js": "^2.35.2",
     "react": "^18.3.1",
+    "react-arrows": "^1.2.0",
     "react-dom": "^18.3.1",
     "react-plotly.js": "^2.6.0",
+    "react-xarrows": "^1.7.0",
     "three": "^0.169.0",
     "three-subdivision-modifier": "^1.0.5"
   },

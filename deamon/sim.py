@@ -1,6 +1,7 @@
 import numpy as np
 import datetime
 import pandas as pd
+from loadsavejson.savejson import savejson
 
 def theta(x):
     eta = 10
@@ -17,7 +18,7 @@ def computedistribution(spiras):
         return np.ones(len(spiras))/len(spiras)
     
     xspan = np.arange(0,len(spiras))
-    sigma = 10
+    sigma = 15
 
     if np.sum(spiras) == 0:
         mid = len(spiras)//2
@@ -52,7 +53,7 @@ def sim():
 
 
     date0 = datetime.datetime(2020, 1, 1, 0, 0, 0)
-    date0_stamp = date0.timestamp()
+    date0_stamp = datetime.now().timestamp()
 
 
     datestamp_span = date0_stamp + tspan
@@ -80,13 +81,18 @@ def sim():
         spiras_list.append(spiras.copy().tolist())
 
 
-    return {
+
+    r =  {
         "tspan": tspan.tolist(),
         "pspan": pspan.tolist(),
         "date_span": date_span,
         "long_time": long_time,
         "spiras": spiras_list,
     }
+
+    savejson(r, "sim_data.json")
+
+    return r
 
 
 
@@ -95,13 +101,22 @@ def sim_data():
 
     df = pd.read_csv("../model/datos_presiones_prepo.csv", sep=';')
     tspan = df["tspan"].values
-    nt = len(tspan)
 
+    now = datetime.datetime.now().timestamp()
+
+
+    long_time = tspan[-1] - tspan[0]
+    print("long_time", long_time)
+    t0 = np.mod(now, long_time)
+    tspan = tspan + t0
+
+    nt = len(tspan)
+    print("tspan", tspan)
     pspan = df["Presion"].values
 
 
     date0 = datetime.datetime(2020, 1, 1, 0, 0, 0)
-    date0_stamp = date0.timestamp()
+    date0_stamp = datetime.datetime.now().timestamp()
 
 
     datestamp_span = date0_stamp + tspan
@@ -114,7 +129,7 @@ def sim_data():
 
     spiras = np.zeros(nslots) 
 
-    rotura_prob_base = 0.05
+    rotura_prob_base = 0.2
 
     spiras_list = []
     for i in range(nt):
@@ -128,10 +143,16 @@ def sim_data():
         spiras_list.append(spiras.copy().tolist())
 
 
-    return {
+    r =  {
         "tspan": tspan.tolist(),
         "pspan": pspan.tolist(),
         "date_span": date_span,
         "long_time": long_time,
         "spiras": spiras_list,
     }
+
+    r_to_save = r.copy()
+    r_to_save.pop("date_span")
+    savejson(r_to_save, "sim_data.json")
+
+    return r

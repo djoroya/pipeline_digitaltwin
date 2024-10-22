@@ -6,10 +6,14 @@ function mapValueToColor(value) {
     const green_1 = 30/255
     const blue_1 =240/255
 
-    // gray
-    const red_2 = 145/255
-    const green_2 = 134/255
-    const blue_2 = 125/255
+    // // gray
+    // const red_2 = 145/255
+    // const green_2 = 134/255
+    // const blue_2 = 125/255
+
+    const red_2 = 255/255
+    const green_2 = 0/255
+    const blue_2 = 0/255
 
     const color = new THREE.Color( value < 0.5 ? red_1 : red_2, 
                                    value < 0.5 ? green_1 : green_2, 

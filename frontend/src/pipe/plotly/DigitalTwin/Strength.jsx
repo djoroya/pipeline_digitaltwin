@@ -188,18 +188,19 @@ export const Strength = () => {
                 y: 0.9,
                 yanchor: 'top'
               },
-                xaxis: { title: 'Datetime',range: xlim_1},
-                yaxis: { title: {
+              xaxis: { title: 'Datetime',range: xlim_1},
+              yaxis: { title: {
                             text: 'Strength Forecast (MPa)',
-                            font: {
-                                size: 14,
-                            }
-                },
+                            font: {size: 15}
+                              },
+                        range: [-60, 20],
+                        fixedrange: true,
+                        autorange: false,
 
                           },
-                width: 750,
-                height: 320,
-                margin: { t: 50, b: 50, l: 100, r: 20 },
+                          width: 690,
+                          height: 320,
+                margin: { t: 50, b: 50, l: 50, r: 20 },
                 legend: {
                         x: 0.5,   // Posición horizontal (0.0 a 1.0)
                         y:0.65,   // Posición vertical (0.0 a 1.0)

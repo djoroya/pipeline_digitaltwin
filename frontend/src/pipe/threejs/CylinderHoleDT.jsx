@@ -20,7 +20,7 @@ export function CylinderHoleOnly() {
 
   const zlong = 15.625
 
-  const radiusfactor  = 4
+  const radiusfactor  = 5
   return (
     <>
       {/* <CameraRotator /> */}
