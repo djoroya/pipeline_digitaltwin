@@ -202,8 +202,8 @@ export const Strength = () => {
                           height: 320,
                 margin: { t: 50, b: 50, l: 50, r: 20 },
                 legend: {
-                        x: 0.5,   // Posición horizontal (0.0 a 1.0)
-                        y:0.65,   // Posición vertical (0.0 a 1.0)
+                        x: 0.2,   // Posición horizontal (0.0 a 1.0)
+                        y:0.75,   // Posición vertical (0.0 a 1.0)
                         xanchor: 'center',  // Centra la leyenda horizontalmente
                         yanchor: 'top',     // Alinea la leyenda en la parte superior,
                         font: {

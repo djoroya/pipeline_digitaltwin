@@ -91,7 +91,7 @@ const PressurePlot = () => {
                 width: 750,
                 height: 280,
                 title: 'Stress Profile',
-                margin: { t: 40, b: 50, l: 100, r: 60 },
+                margin: { t: 40, b: 50, l: 60, r: 100 },
                 plot_bgcolor: "white",
                 paper_bgcolor: "white",
                 legend: {
@@ -103,7 +103,7 @@ const PressurePlot = () => {
             }
 
             const xlim_1 = [posix[0], 
-                            time_forecast_iso_add_first[time_forecast_iso_add_first.length-1]]
+                            2+posix[posix.length-1]]
 
 
     return (

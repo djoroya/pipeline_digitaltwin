@@ -18,7 +18,7 @@ def computedistribution(spiras):
         return np.ones(len(spiras))/len(spiras)
     
     xspan = np.arange(0,len(spiras))
-    sigma = 15
+    sigma = 12
 
     if np.sum(spiras) == 0:
         mid = len(spiras)//2
@@ -129,7 +129,7 @@ def sim_data():
 
     spiras = np.zeros(nslots) 
 
-    rotura_prob_base = 0.2
+    rotura_prob_base = 0.15
 
     spiras_list = []
     for i in range(nt):
@@ -149,6 +149,7 @@ def sim_data():
         "date_span": date_span,
         "long_time": long_time,
         "spiras": spiras_list,
+        "t0":t0
     }
 
     r_to_save = r.copy()

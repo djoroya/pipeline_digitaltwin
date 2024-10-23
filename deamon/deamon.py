@@ -16,6 +16,7 @@ tspan = rdata['tspan']
 pspan = rdata['pspan']
 date_span = rdata['date_span']
 long_time = rdata['long_time']
+t0 = rdata['t0']
 
 def create_model(series):
     model = ARIMA(series, order=(2, 2, 2)) # p, d, q
@@ -30,22 +31,33 @@ print("The forecast model was trained")
 sigma_hist = []
 sigma_hist_max =[]
 times_call = [0]
-def get_mesurement():    
+global idx 
+idx = 0
+
+def get_mesurement():
+
     global forecast_model  # Declara que vas a usar la variable global forecast_model
     global sigma_hist
     global sigma_hist_max
+    global idx
     
     now = datetime.datetime.now().timestamp()
     now_mod = np.mod(now, long_time)
 
-    idx = np.argmin(np.abs(tspan - now_mod ))
+    idx_new = np.argmin(np.abs(tspan - now_mod ))
 
 
-    if idx  == 0:
+    print(50*"*")
+    print("idx: ", idx)
+    print("idx_new: ", idx_new)
+    print("now_mod: ", now_mod)
+    print("long: ", long_time)
+    if idx >= idx_new:
         # datadta 
-        sigma_hist = []
-        sigma_hist_max =[]
+        sigma_hist     = []
+        sigma_hist_max = []
 
+    idx = idx_new
     
     if len(sigma_hist) > 2:
         dsigma = sigma_hist[-1] - sigma_hist[-2]
@@ -58,7 +70,7 @@ def get_mesurement():
             print("The forecast model was trained")
 
     spiras_list = rdata['spiras'][idx]
-    preassure  = pspan[idx]
+    preassure   = pspan[idx]
 
 
     diff = np.diff(spiras_list) != 0
@@ -81,14 +93,10 @@ def get_mesurement():
     # sigma_hist.append(sigma_max)
     sigma_hist.append(sigma_max)
 
-    if len(sigma_hist) == 0:
-        sigma_hist_max.append(sigma_max)
-        sigma_memo = sigma_max
-    else:
-        sigma_max_old = np.max(sigma_hist)
-        sigma_memo = np.max([sigma_max, sigma_max_old])
-        
-        sigma_hist_max.append(sigma_memo)
+    sigma_max_old = np.max(sigma_hist)
+    sigma_memo = np.max([sigma_max, sigma_max_old])
+    
+    sigma_hist_max.append(sigma_memo)
 
 
 
@@ -97,7 +105,6 @@ def get_mesurement():
 
     times_call[0] =  times_call[0] + 1
     times_call[0] = np.mod(times_call[0], 2)
-    print(50*"*")
 
     if times_call[0] == 0:
         print("The forecast model will be trained")
@@ -108,8 +115,11 @@ def get_mesurement():
         print("Size of the sigma_hist: ", len(sigma_hist))
         # add the sigma_hist last value to the model
         try:
-            forecast_model = forecast_model.append(sigma_hist_max[-2:-1], refit=False)
+            if len(sigma_hist_max) > 0:
+                print("The forecast model will be appended")
+            forecast_model = forecast_model.append([sigma_hist_max[-1]], refit=False)
         except:
+            print("Sigma_hist_max: ", sigma_hist_max)
             print("Error in the append of the model")
 
 

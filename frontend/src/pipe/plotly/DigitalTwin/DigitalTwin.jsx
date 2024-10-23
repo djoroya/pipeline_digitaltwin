@@ -7,7 +7,7 @@ export const DigitalTwin = () => {
 
 
     return (
-            <div style={{display: 'flex', flexDirection: 'column',paddingLeft: '50px'}}>
+            <div>
 
             {/* <CylinderHoleDT coil={1/100} width={"800px"}/> */}
             <StressProfile/>
